@@ -2,9 +2,10 @@
 <html>
     <head>
         <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <!--<link href="css/canvas.css" rel="stylesheet" />-->
     </head>
     <body>
-        <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        <div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header"><a class="navbar-brand" href="#">Spectral</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
@@ -26,30 +27,20 @@
                 </div>
             </div>
         </div>
-<div style="display:flex;flex-direction:row">
-        <canvas id="myCanvas" style="flex:1"></canvas>
-</div>
-        <script>
-var canvas = document.getElementById('myCanvas');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-var context = canvas.getContext('2d');
-var imageObj = new Image();
-
-imageObj.onload = function() {
-    context.drawImage(imageObj, 0, 0);
-};
-imageObj.src = 'scream.png';
-        </script>
+        <div class="text-center">
+            <img id="first_img" src="first.jpg">
+            </br>
+            <img id="second_img" src="second.jpg">
+        </div>
     </body>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/Event.js"></script>
-        <script type="text/javascript" src="js/Dragdrop.js"></script>
-        <script type="text/javascript" src="js/RulersGuides.js"></script>
-        <script type="text/javascript">
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/Event.js"></script>
+    <script type="text/javascript" src="js/Dragdrop.js"></script>
+    <script type="text/javascript" src="js/RulersGuides.js"></script>
+    <script type="text/javascript">
 var evt         = new Event(),
     dragdrop    = new Dragdrop(evt),
     rg          = new RulersGuides(evt, dragdrop);
-        </script>
+    </script>
 </html>

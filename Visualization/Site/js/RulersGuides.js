@@ -143,7 +143,7 @@ var RulersGuides = function (evt, dragdrop) {
             return [w, h];
         },
         getScrollPos = function () {
-            var t = Math.max(doc.scrollTop, body.scrollTop),
+            var t = Math.max(doc.scrollTop, body.scrollTop) + 50,
                 l = Math.max(doc.scrollLeft, body.scrollLeft);
 
             return [t, l];
