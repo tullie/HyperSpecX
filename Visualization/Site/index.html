@@ -2,8 +2,6 @@
 <html>
     <head>
         <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <script src="js/bootstrap.js"></script>
-        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
         <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
@@ -28,17 +26,30 @@
                 </div>
             </div>
         </div>
-
-        <canvas id="myCanvas" width="578" height="400"></canvas>
+<div style="display:flex;flex-direction:row">
+        <canvas id="myCanvas" style="flex:1"></canvas>
+</div>
         <script>
 var canvas = document.getElementById('myCanvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 var context = canvas.getContext('2d');
 var imageObj = new Image();
 
 imageObj.onload = function() {
-    context.drawImage(imageObj, 69, 50);
+    context.drawImage(imageObj, 0, 0);
 };
 imageObj.src = 'scream.png';
         </script>
     </body>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/Event.js"></script>
+        <script type="text/javascript" src="js/Dragdrop.js"></script>
+        <script type="text/javascript" src="js/RulersGuides.js"></script>
+        <script type="text/javascript">
+var evt         = new Event(),
+    dragdrop    = new Dragdrop(evt),
+    rg          = new RulersGuides(evt, dragdrop);
+        </script>
 </html>
