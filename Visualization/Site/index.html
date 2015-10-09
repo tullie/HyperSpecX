@@ -1,8 +1,34 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
+        <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header"><a class="navbar-brand" href="#">Spectral</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-menubuilder">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="1">Mineral 1</a>
+                        </li>
+                        <li><a href="2">Mineral 2</a>
+                        </li>
+                        <li><a href="3">Mineral 3</a>
+                        </li>
+                        <li><a href="4">Mineral 4</a>
+                        </li>
+                        <li><a href="5">Mineral 5</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <canvas id="myCanvas" width="578" height="400"></canvas>
         <script>
 var canvas = document.getElementById('myCanvas');
