@@ -1,6 +1,6 @@
 package MineralParsing;
 
-public interface RGBI {
+public interface RgbI {
   int getRed();
   int getGreen();
   int getBlue();
