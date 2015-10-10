@@ -32,19 +32,11 @@
 
     </body>
     <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/minimap.min.js"></script>
+    <script src="js/jquery.minimap.min.js"></script>
     <script>
-var previewBody = $('body').minimap({
-    heightRatio : 0.6,
-    widthRatio : 0.05,
-    offsetHeightRatio : 0.035,
-    offsetWidthRatio : 0.035,
-    position : "right",
-    touch: true,
-    smoothScroll: true,
-    smoothScrollDelay: 200,
-    onPreviewChange: function() {}
-});
+
+//$(document.body).minimap();
+document.getElementById("imgDiv").minimap();
     </script>
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
