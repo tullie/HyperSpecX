@@ -147,6 +147,13 @@ function addNavButton(mineralName){
     a.setAttribute('id', 'button-'+mineralName);
     a.innerHTML = mineralName;
 
+    var colour;
+    if(colours[mineralName]){
+        colour = "#"+rgbToHex(colours[mineralName].r, colours[mineralName].g, colours[mineralName].b);
+    } else {
+        colour = "#FFF";
+    }
+    a.setAttribute('style',"border-bottom-style: solid; border-bottom-width: 10px; border-bottom-color:" +colour+";");
     li.appendChild(a);
     list.appendChild(li);
 }
