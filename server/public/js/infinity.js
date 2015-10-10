@@ -5,11 +5,14 @@ var layers = {};
 var chunks_per_mineral = [];
 var displayed_images = [];
 
-function toggleLayer(key){
+function toggleLayer(button){
+    var key = button.innerHTML;
+
     if(layers[key].visible){
         var toDel = document.getElementById('layer-'+key);
         toDel.parentNode.removeChild(toDel);
         layers[key].visible = false;
+        button.parentNode.setAttribute('class','');
     } else {
         var div = document.createElement("div");
         layers[key].imgs.forEach(function(imgSrc) {
@@ -20,27 +23,18 @@ function toggleLayer(key){
 
         document.getElementById('imgDiv').appendChild(div);
         layers[key].visible = true;
+        button.parentNode.setAttribute('class','active');
     }
 }
 
 function addImage(img, div) {
     var image = new Image();
     image.src = img;
-    // image.setAttribute('class', 'layer-'+key+' layer');
     displayed_images.push(image);
     
     linebreak = document.createElement("br");
     div.appendChild(image);
     div.appendChild(linebreak);
-}
-
-function loadMineralChunks(index){
-    if (index === 'base') {
-        index = minerals.length-1;
-    }
-    for(var i = 0; i < displayed_images.length; ++i) {
-        displayed_images[i].src = chunks_per_mineral[index][i];
-    }
 }
 
 function setup() {
@@ -54,7 +48,7 @@ function setup() {
                 numberOfChunks = res.numberOfChunks;
                 minerals.push("base");
                 getLayers();
-                // populateChunks();
+                addButtons();
             }
         }
     }
@@ -67,10 +61,24 @@ function setup() {
     ajaxReq.send();
 }
 
-function addNavButton(){
-    document.getElementById('imgDiv').appendChild(div);
-    // <li><a href="javaScript:void(0);" onclick="loadMineralChunks('base')">Base</a>
-    //                     </li>
+function addButtons(){
+    minerals.forEach(function(key) {
+        addNavButton(key);
+    });
+    toggleLayer(document.getElementById('button-base'));
+}
+
+function addNavButton(mineralName){
+    var list = document.getElementById('list-minerals');
+    var li = document.createElement("li");
+    var a = document.createElement("a");
+    a.setAttribute('href', 'javaScript:void(0);');
+    a.setAttribute('onclick', 'toggleLayer(this)');
+    a.setAttribute('id', 'button-'+mineralName);
+    a.innerHTML = mineralName;
+
+    li.appendChild(a);
+    list.appendChild(li);
 }
 
 function getLayers(){
@@ -79,31 +87,10 @@ function getLayers(){
         for (j = 0; j < numberOfChunks; ++j) {
             inside.push(URL + '/data/chunks/' + j + '/' + key);
         }
+        layers[key] = new Object();
         layers[key].imgs = inside;
         layers[key].visible = false;
     });
-    toggleLayer("base");
-
-}
-
-function populateChunks() {
-    getLayers();
-    minerals.forEach(function(key) {
-        var inside = [];
-        for (j = 0; j < 3; ++j) {
-            inside.push(URL + '/data/chunks/' + j + '/' + key);
-        }
-        chunks_per_mineral.push(inside);
-    });
-    minerals.push('base');
-    var inside = [];
-    for (j = 0; j < 3; ++j) {
-        var img = URL + '/data/chunks/' + j + '/base';
-        inside.push(img);
-        addImage(img);
-    }
-    chunks_per_mineral.push(inside);
 }
 
 setup();
-console.log(chunks_per_mineral);
