@@ -4,6 +4,7 @@
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
         <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link href="css/style.css" rel="stylesheet" />
+        <link href="css/minimap.min.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="HyperSex">
     </head>
@@ -31,6 +32,20 @@
 
     </body>
     <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/minimap.min.js"></script>
+    <script>
+var previewBody = $('body').minimap({
+    heightRatio : 0.6,
+    widthRatio : 0.05,
+    offsetHeightRatio : 0.035,
+    offsetWidthRatio : 0.035,
+    position : "right",
+    touch: true,
+    smoothScroll: true,
+    smoothScrollDelay: 200,
+    onPreviewChange: function() {}
+});
+    </script>
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/Event.js"></script>
