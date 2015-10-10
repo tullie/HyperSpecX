@@ -9,7 +9,7 @@ var colours = [];
 
 function makeColours(callback){
 	
-	async.each(config.minerals, function(mat, callback){
+	async.each(config.m, function(mat, callback){
 		var col = {};
 		col.r = Math.round(Math.random()*255);
 		col.g = Math.round(Math.random()*255);
@@ -23,8 +23,8 @@ function makeColours(callback){
 
 function init(){
 	var numChunks = config.numberOfChunks;
-	var numMinerals = config.minerals.length;
-	var mins = config.minerals;
+	var numMinerals = config.m.length;
+	var mins = config.m;
 
 	makeColours(function(){
 		var list = [];
@@ -65,6 +65,7 @@ function getImage(chunkID, mineralName, callback){
 				}
 
 				var json = JSON.parse(data);
+				console.log(json.length)
 
 				var img = new PNG({
 					width: config.chunkWidth,
@@ -72,33 +73,65 @@ function getImage(chunkID, mineralName, callback){
 					filterType: -1
 				});
 
-				for (var y = 0; y < img.height; y++) {
-					for (var x = 0; x < img.width; x++) {
-						var idx = (img.width * y + x) << 2;
-						var current = json.pixels[(img.width * y + x)];
+				for (var i = 0, len = json.length; i < len; i++) { 
+					var idx = i*4;
+					var item = json[i];
 
-						if(mineralName === "base"){
-							img.data[idx] = current.r; 	//red
-							img.data[idx+1] = current.g; 	//green
-							img.data[idx+2] = current.b;	//blue
-						} else {
-							img.data[idx] = colours[mineralName].r; 	//red
-							img.data[idx+1] = colours[mineralName].g; 	//green
-							img.data[idx+2] = colours[mineralName].b;	//blue
-						}
-						// and reduce opacity 
-						var opacity;
-						if(mineralName === "base"){
-							opacity = 255;
-						} else if (current.minerals.hasOwnProperty(mineralName)){
-							opacity = current.minerals[mineralName]*255;
-						} else {
-							opacity = 0;
-						}
-
-						img.data[idx+3] = opacity;
+					if(mineralName === "base"){
+						img.data[idx] = item.r; 	//red
+						img.data[idx+1] = item.g; 	//green
+						img.data[idx+2] = item.b;	//blue
+					} else {
+						img.data[idx] = colours[mineralName].r; 	//red
+						img.data[idx+1] = colours[mineralName].g; 	//green
+						img.data[idx+2] = colours[mineralName].b;	//blue
 					}
+					// and reduce opacity 
+					var opacity;
+					if(mineralName === "base"){
+						opacity = 255;
+					} else if (item.m.hasOwnProperty(mineralName)){
+						opacity = item.m[mineralName]*255;
+					} else {
+						opacity = 0;
+					}
+
+					img.data[idx+3] = opacity;
+
+					idx += 4; 
 				}
+
+
+				// for (var y = 0; y < img.height; y++) {
+				// 	for (var x = 0; x < img.width; x++) {
+				// 		var idx = (img.width * y + x) << 2;
+				// 		var current = json[(img.width * y + x)];
+				// 		// console.log(current);
+
+				// 		// if(current===undefined)continue;
+
+				// 		if(mineralName === "base"){
+				// 			img.data[idx] = current.r; 	//red
+				// 			img.data[idx+1] = current.g; 	//green
+				// 			img.data[idx+2] = current.b;	//blue
+				// 		} else {
+				// 			img.data[idx] = colours[mineralName].r; 	//red
+				// 			img.data[idx+1] = colours[mineralName].g; 	//green
+				// 			img.data[idx+2] = colours[mineralName].b;	//blue
+				// 		}
+				// 		// and reduce opacity 
+				// 		var opacity;
+				// 		if(mineralName === "base"){
+				// 			opacity = 255;
+				// 		} else if (current.m.hasOwnProperty(mineralName)){
+				// 			opacity = current.m[mineralName]*255;
+				// 		} else {
+				// 			opacity = 0;
+				// 		}
+
+				// 		img.data[idx+3] = opacity;
+				// 	}
+				// }
 
 				var stream = img.pack();
 

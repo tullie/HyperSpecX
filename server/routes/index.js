@@ -30,12 +30,12 @@ router.get('/data/minerals/', function(req, res, next) {
 
 router.get('/data/minerals/:ID', function(req, res, next) {
 	fs.readFile(path.join(base, "data", "minerals.json"), 'utf8', function (err, data) {
-		if(config.minerals[req.params.ID] === undefined) {
+		if(config.m[req.params.ID] === undefined) {
 			res.status(404);
 			res.send(JSON.stringify({"error":{"status":404, "message":"mineral not found"}}));
 		}
 
-		res.send(config.minerals[req.params.ID]);
+		res.send(config.m[req.params.ID]);
 	});
 });
 
@@ -71,7 +71,7 @@ router.get('/data/chunks/:CHUNKID/:MINERAL', function(req, res, next) {
 		return;
 	}
 
-	if(config.minerals.indexOf(req.params.MINERAL) == -1 && req.params.MINERAL != "base"){
+	if(config.m.indexOf(req.params.MINERAL) == -1 && req.params.MINERAL != "base"){
 		res.status(404);
 		res.write(JSON.stringify({"error":{"status":404, "message":"invalid mineral name"}}));
 		res.end();

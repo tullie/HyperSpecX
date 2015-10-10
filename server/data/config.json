@@ -1,10 +1,6 @@
 {
-	"numberOfChunks": 4,
-	"chunkWidth": 768,
-	"chunkHeight" : 1024,
-	"minerals": [
-        "one",
-        "two",
-        "three"
-    ]
+	"numberOfChunks": 1,
+	"chunkWidth": 200,
+	"chunkHeight" : 800,
+	"m":["Kaolinite WX","Kaolinite PX","Dickite","Muscovite","Paragonite","Montmorillonite","Nontronite","Magnesium Clays","FeMgChlorite","MgChlorite","Biotite","Phlogopite","Actinolite","Riebeckite","Hornblende","Serpentine","Epidote","Zoisite","FeTourmaline","Calcite","Dolomite","Ankerite","Magnesite","Siderite","Jarosite","Opal","Illitic Muscovite","Fe2+ Goethite","Fe3+ Goethite","FeChlorite","Talc","Rubellite"]
 }
