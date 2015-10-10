@@ -1,7 +1,7 @@
 package MineralClassification;
 
-import MineralParsing.MineralDataI;
+import MineralParsing.MineralGridI;
 
 public interface MineralClassifierI {
-  MineralDataI predictMineralData(MineralDataI rawMineralData);
+  MineralGridI predictMineralData(MineralGridI rawMineralData);
 }

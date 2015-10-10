@@ -1,6 +1,7 @@
 package MineralClassification;
 
-import MineralParsing.MineralDataI;
+import MineralParsing.MineralDatumI;
+import MineralParsing.MineralGridI;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -8,25 +9,27 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Converts MineralData to JSON strings.
+ * Converts MineralGrid to JSON strings.
  */
 public class MineralDataToJson {
-  public static String parseResolvedMineralData(MineralDataI mineralDataI) {
-   return parseResolvedMineralDataToJson(mineralDataI).toString();
+  public static String parseResolvedMineralData(MineralGridI mineralGridI) {
+   return parseResolvedMineralDataToJson(mineralGridI).toString();
   }
 
-  private static JSONArray parseResolvedMineralDataToJson(MineralDataI mineralData) {
+  private static JSONArray parseResolvedMineralDataToJson(MineralGridI mineralData) {
     JSONArray outerArray = new JSONArray();
-    for (List<ResolvedMineralDatumI> row : mineralData.getResolvedMineralRect()) {
-      for (ResolvedMineralDatumI datum : row) {
-        outerArray.add(parseResolvedMineralDatumToJson(datum));
+    for (List<MineralDatumI> row : mineralData.getMineralRect()) {
+      for (MineralDatumI datum : row) {
+        if (datum.getMinerals() != null) {
+          outerArray.add(parseResolvedMineralDatumToJson(datum));
+        }
       }
     }
 
     return outerArray;
   }
 
-  private static JSONObject parseResolvedMineralDatumToJson(ResolvedMineralDatumI mineralDatum) {
+  private static JSONObject parseResolvedMineralDatumToJson(MineralDatumI mineralDatum) {
     JSONObject jsonDatum = new JSONObject();
     jsonDatum.put("r", mineralDatum.getRed());
     jsonDatum.put("g", mineralDatum.getGreen());
