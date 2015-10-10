@@ -1,15 +1,7 @@
 package MineralClassification;
 
-<<<<<<< f0338656871dff7ed48592958d2453c541ddd3b3
-<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
-import MineralParsing.MineralDataI;
-=======
-import MineralParsing.interfaces.MineralDataI;
-import MineralParsing.interfaces.ResolvedMineralDatumI;
->>>>>>> pushing
-=======
+import MineralParsing.MineralDatumI;
 import MineralParsing.MineralGridI;
->>>>>>> Refactors everything
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -26,22 +18,18 @@ public class MineralDataToJson {
 
   private static JSONArray parseResolvedMineralDataToJson(MineralGridI mineralData) {
     JSONArray outerArray = new JSONArray();
-    for (List<ResolvedMineralDatumI> row : mineralData.getResolvedMineralRect()) {
-      for (ResolvedMineralDatumI datum : row) {
-<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
-        outerArray.add(parseResolvedMineralDatumToJson(datum));
-=======
+    for (List<MineralDatumI> row : mineralData.getMineralRect()) {
+      for (MineralDatumI datum : row) {
         if (datum.getMinerals() != null) {
           outerArray.add(parseResolvedMineralDatumToJson(datum));
         }
->>>>>>> pushing
       }
     }
 
     return outerArray;
   }
 
-  private static JSONObject parseResolvedMineralDatumToJson(ResolvedMineralDatumI mineralDatum) {
+  private static JSONObject parseResolvedMineralDatumToJson(MineralDatumI mineralDatum) {
     JSONObject jsonDatum = new JSONObject();
     jsonDatum.put("r", mineralDatum.getRed());
     jsonDatum.put("g", mineralDatum.getGreen());
