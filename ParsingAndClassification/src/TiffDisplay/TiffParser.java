@@ -38,6 +38,5 @@ public class TiffParser {
     channel.read(buffer);
     Image image = load(buffer.array());
     Image imageScaled = image.getScaledInstance(500, -1,  Image.SCALE_SMOOTH);
-    JOptionPane.showMessageDialog(null, new JLabel(
-        new ImageIcon( imageScaled )) );
+    JOptionPane.showMessageDialog(null, new JLabel(new ImageIcon( imageScaled )));
   }}

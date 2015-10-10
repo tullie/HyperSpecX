@@ -26,8 +26,8 @@
       <file leaf-file-name="TiffParser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TiffDisplay/TiffParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.34991974">
+              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -536,12 +536,12 @@
       <workItem from="1444394342724" duration="2000" />
       <workItem from="1444395076835" duration="1748000" />
       <workItem from="1444448198088" duration="621000" />
-      <workItem from="1444449212527" duration="5318000" />
+      <workItem from="1444449212527" duration="5717000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7689000" />
+    <option name="totallyTimeSpent" value="8088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="0" />
@@ -591,11 +591,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
           <folding>
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -671,8 +671,8 @@
         <state vertical-scroll-proportion="0.6026786">
           <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -682,11 +682,11 @@
         <state vertical-scroll-proportion="0.13392857">
           <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
           <folding>
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -712,22 +712,22 @@
         <state vertical-scroll-proportion="0.4017857">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding>
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1444453921000" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder=" { " />
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder=" }" />
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder=" { " />
-            <marker date="1444453921000" expanded="false" signature="-1:-1" placeholder=" }" />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="/**...*/" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder=" { " />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder=" }" />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder=" { " />
+            <marker date="1444455368000" expanded="false" signature="-1:-1" placeholder=" }" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TiffDisplay/TiffParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.34991974">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
