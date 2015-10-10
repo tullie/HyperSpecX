@@ -18,6 +18,10 @@ public class MineralGrid implements MineralGridI {
     rect.add(m);
   }
 
+  public void clear(){
+    rect.clear();
+  }
+
   @Override public List<List<MineralDatumI>> getMineralRect() {
     List<List<MineralDatumI>> list = new ArrayList<>(height);
     for (int j = 0; j < height; ++j) {

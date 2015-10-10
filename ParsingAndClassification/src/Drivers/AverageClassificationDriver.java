@@ -15,7 +15,7 @@ public class AverageClassificationDriver {
 
     // Parse files.
     Parse parse = new Parse();
-    MineralGridI unresolvedMineralGrid = parse.parseFilesToMineralData(1000, 124);
+    MineralGridI unresolvedMineralGrid = parse.parseFilesToMineralData(1000, 124, 1);
 
     // Classify
     MineralClassifierI classifier = new AverageSpectralClassifier();

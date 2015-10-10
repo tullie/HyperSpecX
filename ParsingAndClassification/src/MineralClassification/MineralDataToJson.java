@@ -20,9 +20,7 @@ public class MineralDataToJson {
     JSONArray outerArray = new JSONArray();
     for (List<MineralDatumI> row : mineralData.getMineralRect()) {
       for (MineralDatumI datum : row) {
-        if (datum.getMinerals() != null) {
-          outerArray.add(parseResolvedMineralDatumToJson(datum));
-        }
+      outerArray.add(parseResolvedMineralDatumToJson(datum));
       }
     }
 
@@ -36,8 +34,10 @@ public class MineralDataToJson {
     jsonDatum.put("b", mineralDatum.getBlue());
 
     JSONObject jsonMinerals = new JSONObject();
-    for (Map.Entry<String, Double> mineralEntry : mineralDatum.getMinerals().entrySet()) {
-      jsonMinerals.put(mineralEntry.getKey(), mineralEntry.getValue());
+    if (mineralDatum.getMinerals() != null) {
+        for (Map.Entry<String, Double> mineralEntry : mineralDatum.getMinerals().entrySet()) {
+          jsonMinerals.put(mineralEntry.getKey(), mineralEntry.getValue());
+        }
     }
     jsonDatum.put("m", jsonMinerals);
 
