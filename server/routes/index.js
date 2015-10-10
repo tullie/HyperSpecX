@@ -5,20 +5,20 @@ var router = express.Router();
 var getImage = require("../imageGen.js");
 
 var base = process.env.PWD;
-
+function isNumber(obj) { return !isNaN(parseFloat(obj)) }
 
 var fs = require("fs");
 
-router.get('/json/', function(req, res, next) {
+router.get('/data/', function(req, res, next) {
 	res.send(JSON.stringify({"links":["minerals","chunks"]}));
 });
 
-router.get('/json/chunks/', function(req, res, next) {
+router.get('/data/chunks/', function(req, res, next) {
 	res.send(JSON.stringify(config));
 });
 
 //returns the JSON array of mineral names corresponding to indexes of layers
-router.get('/json/minerals/', function(req, res, next) {
+router.get('/data/minerals/', function(req, res, next) {
 	fs.readFile(path.join(base, "data", "minerals.json"), 'utf8', function (err, data) {
 		if (err) {
 			next(err);
@@ -28,7 +28,7 @@ router.get('/json/minerals/', function(req, res, next) {
 	});
 });
 
-router.get('/json/minerals/:ID', function(req, res, next) {
+router.get('/data/minerals/:ID', function(req, res, next) {
 	fs.readFile(path.join(base, "data", "minerals.json"), 'utf8', function (err, data) {
 		if(config.minerals[req.params.ID] === undefined) {
 			res.status(404);
@@ -39,7 +39,7 @@ router.get('/json/minerals/:ID', function(req, res, next) {
 	});
 });
 
-router.get('/json/chunks/:CHUNKID', function(req, res, next) {
+router.get('/data/chunks/:CHUNKID', function(req, res, next) {
 	//if the project doesnt exist, go to 404
 	if(req.params.CHUNKID < 0 || req.params.CHUNKID > config.numberOfChunks-1 ) {
 		res.status(404);
@@ -57,8 +57,13 @@ router.get('/json/chunks/:CHUNKID', function(req, res, next) {
 	});
 });
 
-router.get('/json/chunks/:CHUNKID/:MINERAL', function(req, res, next) {
-	//if the project doesnt exist, go to 404
+router.get('/data/chunks/:CHUNKID/:MINERAL', function(req, res, next) {
+	if(!isNumber(req.params.CHUNKID)){
+		res.status(404);
+		res.write(JSON.stringify({"error":{"status":404, "message":"invalid chunk id"}}));
+		res.end();
+		return;
+	}
 	if(req.params.CHUNKID < 0 || req.params.CHUNKID > config.numberOfChunks-1 ) {
 		res.status(404);
 		res.write(JSON.stringify({"error":{"status":404, "message":"invalid chunk id"}}));
