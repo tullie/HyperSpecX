@@ -17,20 +17,17 @@
                 <div class="collapse navbar-collapse navbar-menubuilder">
                     <ul class="nav navbar-nav navbar-left" id="list-minerals">
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                      <li id="toggle-ruler">
-                        <a href="javaScript:void(0);">Toggle Rulers</a>
-                        <a href="javaScript:void(0);">Toggle Rulers</a>
-                        <a href="javaScript:void(0);">Toggle Rulers</a>
-                      </li>
-                    
-                    </ul>
-
+                <ul class="nav navbar-nav navbar-right">
+                  <li id="toggle-ruler"><a href="javaScript:void(0);">Toggle Rulers</a></li>
+                  <li id="toggle-chart"><a href="javaScript:void(0);">Toggle Chart</a></li>
+                </ul>
                 </div>
                 
             </div>
         </div>
+
         <div id="infoDiv"></div>
+        <div id="cDiv" class="chartDiv vertical-align"><canvas id="myChart" width="400" height="400"></canvas></div>
         <div id="imgDiv" class="text-center">
         
         </div>
@@ -42,6 +39,8 @@
     <script src="js/Event.js"></script>
     <script src="js/Dragdrop.js"></script>
     <script src="js/RulersGuides.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
 var evt         = new Event(),
     dragdrop    = new Dragdrop(evt),
