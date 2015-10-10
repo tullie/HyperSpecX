@@ -6,8 +6,8 @@ public interface UnresolvedMineralDatumI {
   int getRed();
   int getGreen();
   int getBlue();
-  Map<String, Integer> getUnderReflectanceByMineral();
-  Map<String, Integer> getAboveReflectanceByMineral();
+  Map<String, Double> getUnderReflectanceByMineral();
+  Map<String, Double> getAboveReflectanceByMineral();
   boolean reflectanceSet();
 }
 
