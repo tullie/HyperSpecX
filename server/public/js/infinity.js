@@ -2,8 +2,9 @@
 var URL = 'http://localhost:3000';
 var minerals = [];
 var layers = {};
-var chunks_per_mineral = [];
-var displayed_images = [];
+var width;
+var height;
+var count;
 
 function toggleLayer(button){
     var key = button.innerHTML;
@@ -15,11 +16,12 @@ function toggleLayer(button){
         button.parentNode.setAttribute('class','');
     } else {
         var div = document.createElement("div");
+        div.setAttribute('id', 'layer-'+key);
+        div.setAttribute('class', 'layer');
+        count = 0;
         layers[key].imgs.forEach(function(imgSrc) {
             addImage(imgSrc,div)
         });
-        div.setAttribute('id', 'layer-'+key);
-        div.setAttribute('class', 'layer');
 
         document.getElementById('imgDiv').appendChild(div);
         layers[key].visible = true;
@@ -27,14 +29,68 @@ function toggleLayer(button){
     }
 }
 
+$( "#toggle-ruler" ).click(function() {
+  $( ".rg-overlay" ).toggle();
+});
+
+function toggleRuler(){
+
+    
+    var key = button.innerHTML;
+
+    if(layers[key].visible){
+        var toDel = document.getElementById('layer-'+key);
+        toDel.parentNode.removeChild(toDel);
+        layers[key].visible = false;
+        button.parentNode.setAttribute('class','');
+    } else {
+        var div = document.createElement("div");
+        div.setAttribute('id', 'layer-'+key);
+        div.setAttribute('class', 'layer');
+        count = 0;
+        layers[key].imgs.forEach(function(imgSrc) {
+            addImage(imgSrc,div)
+        });
+
+        document.getElementById('imgDiv').appendChild(div);
+        layers[key].visible = true;
+        button.parentNode.setAttribute('class','active');
+    }
+}
+
+
 function addImage(img, div) {
     var image = new Image();
     image.src = img;
-    displayed_images.push(image);
     
     linebreak = document.createElement("br");
-    div.appendChild(image);
+
+    var canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    canvas.setAttribute('id', "can"+count+"-"+div.id);
+    count++;
+    $(canvas).click(function(e) {
+        console.log("DUCKER");
+        var pos = findPos(this);
+        var x = e.pageX - pos.x;
+        var y = e.pageY - pos.y;
+        var coord = "x=" + x + ", y=" + y;
+        var c = this.getContext('2d');
+        var p = c.getImageData(x, y, 1, 1).data; 
+        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+        console.log(coord + "<br>" + hex);
+        $('#infoDiv').html(coord + "<br>" + hex);
+    });
+    
+    image.onload = function() {
+        ctx.drawImage(image, 0, 0);
+    };
+
+    div.appendChild(canvas);
     div.appendChild(linebreak);
+    
 }
 
 function setup() {
@@ -44,7 +100,9 @@ function setup() {
             if (ajaxReq.status==200) {
                 //do something with ajaxReq.responseText
                 var res = JSON.parse(ajaxReq.responseText);
-                minerals = res.minerals;
+                minerals = res.m;
+                width = res.chunkWidth;
+                height = res.chunkHeight;
                 numberOfChunks = res.numberOfChunks;
                 minerals.push("base");
                 getLayers();
@@ -94,3 +152,21 @@ function getLayers(){
 }
 
 setup();
+
+
+function findPos(obj) {
+    var curleft = 0, curtop = 0;
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+        return { x: curleft, y: curtop };
+    }
+    return undefined;
+}
+function rgbToHex(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
