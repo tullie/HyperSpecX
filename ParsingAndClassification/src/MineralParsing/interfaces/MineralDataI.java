@@ -1,4 +1,4 @@
-package MineralParsing;
+package MineralParsing.interfaces;
 
 import MineralClassification.ResolvedMineralDatum;
 import MineralClassification.ResolvedMineralDatumI;
