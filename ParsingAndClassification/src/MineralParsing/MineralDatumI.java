@@ -1,8 +1,8 @@
-package MineralParsing.interfaces;
+package MineralParsing;
 
 import java.util.Map;
 
-public interface ResolvedMineralDatumI {
+public interface MineralDatumI {
   int getRed();
   int getGreen();
   int getBlue();

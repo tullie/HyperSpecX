@@ -4,9 +4,13 @@ package MineralClassification;
 import MineralParsing.MineralDataI;
 =======
 
+<<<<<<< f0338656871dff7ed48592958d2453c541ddd3b3
 import MineralParsing.interfaces.MineralDataI;
 >>>>>>> pushing
+=======
+import MineralParsing.MineralGridI;
+>>>>>>> Refactors everything
 
 public interface MineralClassifierI {
-  MineralDataI predictMineralData(MineralDataI rawMineralData);
+  MineralGridI predictMineralData(MineralGridI rawMineralData);
 }

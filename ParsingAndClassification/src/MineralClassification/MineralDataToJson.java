@@ -1,11 +1,15 @@
 package MineralClassification;
 
+<<<<<<< f0338656871dff7ed48592958d2453c541ddd3b3
 <<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
 import MineralParsing.MineralDataI;
 =======
 import MineralParsing.interfaces.MineralDataI;
 import MineralParsing.interfaces.ResolvedMineralDatumI;
 >>>>>>> pushing
+=======
+import MineralParsing.MineralGridI;
+>>>>>>> Refactors everything
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -13,14 +17,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Converts MineralData to JSON strings.
+ * Converts MineralGrid to JSON strings.
  */
 public class MineralDataToJson {
-  public static String parseResolvedMineralData(MineralDataI mineralDataI) {
-   return parseResolvedMineralDataToJson(mineralDataI).toString();
+  public static String parseResolvedMineralData(MineralGridI mineralGridI) {
+   return parseResolvedMineralDataToJson(mineralGridI).toString();
   }
 
-  private static JSONArray parseResolvedMineralDataToJson(MineralDataI mineralData) {
+  private static JSONArray parseResolvedMineralDataToJson(MineralGridI mineralData) {
     JSONArray outerArray = new JSONArray();
     for (List<ResolvedMineralDatumI> row : mineralData.getResolvedMineralRect()) {
       for (ResolvedMineralDatumI datum : row) {
