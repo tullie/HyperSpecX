@@ -1,19 +1,62 @@
-var images = ["6.jpg", "7.jpg"];
-var offset = 0;
+var URL = 'http://192.168.51.134:3000';
+var minerals = [];
+var chunks_per_mineral = [];
+var displayed_images = [];
 
 function addImage(img) {
-    images.push(img);
-    document.getElementById('imgDiv').appendChild(img);
+    var image = new Image();
+    image.src = img;
+    displayed_images.push(image);
+    document.getElementById('imgDiv').appendChild(image);
+    linebreak = document.createElement("br");
+    document.getElementById('imgDiv').appendChild(linebreak);
 }
 
-function loadImages(){
-    for(var i = 0; i < images.length; i++) {
-        var img = new Image();
-            img.src = images[i];
-        document.getElementById('imgDiv').appendChild(img);
-        linebreak = document.createElement("br");
-        document.getElementById('imgDiv').appendChild(linebreak);
+function loadMineralChunks(index){
+    if (index === 'base') {
+        index = minerals.length-1;
+    }
+    for(var i = 0; i < displayed_images.length; ++i) {
+        displayed_images[i].src = chunks_per_mineral[index][i];
     }
 }
 
-loadImages();
+function setup() {
+    var ajaxReq = new XMLHttpRequest();
+    ajaxReq.onreadystatechange = function() {
+        if (ajaxReq.readyState==4) {
+            if (ajaxReq.status==200) {
+                //do something with ajaxReq.responseText
+                minerals = JSON.parse(ajaxReq.responseText).names;
+                populateChunks();
+            }
+        }
+    }
+    ajaxReq.onerror = function(err) {
+        console.log(err);
+    }
+    ajaxReq.open('GET',
+            URL + '/data/minerals/', true);
+    ajaxReq.setRequestHeader('Content-Type', 'application/json');
+    ajaxReq.send();
+}
+
+function populateChunks() {
+    minerals.forEach(function(key) {
+        var inside = [];
+        for (j = 0; j < 3; ++j) {
+            inside.push(URL + '/data/chunks/' + j + '/' + key);
+        }
+        chunks_per_mineral.push(inside);
+    });
+    minerals.push('base');
+    var inside = [];
+    for (j = 0; j < 3; ++j) {
+        var img = URL + '/data/chunks/' + j + '/base';
+        inside.push(img);
+        addImage(img);
+    }
+    chunks_per_mineral.push(inside);
+}
+
+setup();
