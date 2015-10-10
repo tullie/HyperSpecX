@@ -1,5 +1,4 @@
-// var URL = 'http://192.168.51.134:3000';
-var URL = 'http://localhost:3000';
+var URL = 'http://192.168.51.134:3000';
 var minerals = [];
 var chunks_per_mineral = [];
 var displayed_images = [];

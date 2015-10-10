@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="HyperSex">
+    </head>
+    <body>
+        <div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation" style="z-index:9999;">
+            <div class="container-fluid">
+                <div class="navbar-header"><a class="navbar-brand" href="#">Hyper SpecX</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-menubuilder">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a href="javaScript:void(0);" onclick="loadMineralChunks('base')">Base</a>
+                        </li>
+                        <li><a href="javaScript:void(0);" onclick="loadMineralChunks(1)">Mineral 1</a>
+                        </li>
+                        <li><a href="javaScript:void(0);" onclick="loadMineralChunks(2)">Mineral 2</a>
+                        </li>
+                        <li><a href="javaScript:void(0);" onclick="loadMineralChunks(3)">Mineral 3</a>
+                        </li>
+                        <li><a href="javaScript:void(0);" onclick="loadMineralChunks(5)">Mineral 4</a>
+                        </li>
+                        <li><a href="javaScript:void(0);" onclick="loadMineralChunks(5)">Mineral 5</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="imgDiv" class="text-center">
+        </div>
+    </body>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/Event.js"></script>
+    <script src="js/Dragdrop.js"></script>
+    <script src="js/RulersGuides.js"></script>
+    <script>
+var evt         = new Event(),
+    dragdrop    = new Dragdrop(evt),
+    rg          = new RulersGuides(evt, dragdrop);
+    </script>
+    <script src="js/infinity.js"></script>
+</html>
