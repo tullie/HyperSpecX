@@ -13,14 +13,6 @@ public class NoClassificationDriver {
 
     // Parse files.
     Parse parse = new Parse();
-    MineralGridI unresolvedMineralGrid = parse.parseFilesToMineralData(1000, 124);
-
-    // Parse classified minerals to JSON.
-    String json = MineralDataToJson.parseResolvedMineralData(unresolvedMineralGrid);
-
-    // Write JSON to file.
-    PrintWriter out = new PrintWriter(new File("picture.json"));
-    out.write(json);
-    out.close();
+    MineralGridI unresolvedMineralGrid = parse.parseFilesToMineralData(1000, 124, 100);
   }
 }

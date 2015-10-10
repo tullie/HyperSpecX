@@ -1,5 +1,6 @@
 package MineralParsing;
 
+import MineralClassification.MineralDataToJson;
 import com.opencsv.CSVReader;
 
 import javax.imageio.ImageIO;
@@ -14,30 +15,54 @@ public class Parse {
   private String[] line;
   private BufferedImage img;
 
-  public MineralGrid parseFilesToMineralData(int blockHeight, int centerWidth) {
+  public MineralGrid parseFilesToMineralData(int blockHeight, int centerWidth, int chunks) {
     loadImage();
     loadExcel();
     MineralGrid md = new MineralGrid(img.getWidth(), blockHeight);
     Map<String, Double> mineralMap = null;
-    for (int y = 0; y < blockHeight; y++) {
-      if (y % centerWidth == 0) {
-        mineralMap = readExcelLine();
-      }
-
-      for (int x = 0; x < img.getWidth(); x++) {
-        Map<String, Double> tempMineralMap = null;
-        if (x >= (img.getWidth() / 2) - (centerWidth / 2)
-            && x <= (img.getWidth() / 2) + (centerWidth / 2)) {
-          tempMineralMap = mineralMap;
+    for (int k = 0; k < chunks; k++) {
+      System.out.println("Writing chunk: "+(k+1));
+      md.clear();
+      for (int y = blockHeight*k; y < blockHeight*(k+1); y++) {
+        //get next excel line
+        if (y % centerWidth == 0) {
+          mineralMap = readExcelLine();
         }
-        Color mycolor = new Color(img.getRGB(x, y));
-        md.addDatum(new MineralDatum(tempMineralMap,
-                                     mycolor.getRed(),
-                                     mycolor.getGreen(),
-                                     mycolor.getBlue()));
+
+        for (int x = 0; x < img.getWidth(); x++) {
+          Map<String, Double> tempMineralMap = null;
+          //setmap if x is within centre block
+          if (x >= (img.getWidth() / 2) - (centerWidth / 2)
+                  && x <= (img.getWidth() / 2) + (centerWidth / 2)) {
+            tempMineralMap = mineralMap;
+          }
+          //add new pixel data to the current grid
+          Color mycolor = new Color(img.getRGB(x, y));
+          md.addDatum(new MineralDatum(tempMineralMap,
+                  mycolor.getRed(),
+                  mycolor.getGreen(),
+                  mycolor.getBlue()));
+        }
       }
+      //create a file of the current grid
+      writeToJson(md,k+1);
     }
     return md;
+  }
+
+  private void writeToJson(MineralGridI md, int index){
+    // Parse classified minerals to JSON.
+    String json = MineralDataToJson.parseResolvedMineralData(md);
+
+    // Write JSON to file.
+    PrintWriter out = null;
+    try {
+      out = new PrintWriter(new File("resources/chunks/chunk_"+index+".json"));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+    out.write(json);
+    out.close();
   }
 
   private Map<String, Double> readExcelLine() {
