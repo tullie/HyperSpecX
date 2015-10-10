@@ -1,5 +1,10 @@
 package MineralClassification;
 
+<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
+=======
+import MineralParsing.interfaces.ResolvedMineralDatumI;
+
+>>>>>>> pushing
 import java.util.HashMap;
 import java.util.Map;
 

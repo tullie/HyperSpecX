@@ -1,6 +1,11 @@
 package MineralClassification;
 
+<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
 import MineralParsing.MineralDataI;
+=======
+import MineralParsing.interfaces.MineralDataI;
+import MineralParsing.interfaces.ResolvedMineralDatumI;
+>>>>>>> pushing
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -19,7 +24,13 @@ public class MineralDataToJson {
     JSONArray outerArray = new JSONArray();
     for (List<ResolvedMineralDatumI> row : mineralData.getResolvedMineralRect()) {
       for (ResolvedMineralDatumI datum : row) {
+<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
         outerArray.add(parseResolvedMineralDatumToJson(datum));
+=======
+        if (datum.getMinerals() != null) {
+          outerArray.add(parseResolvedMineralDatumToJson(datum));
+        }
+>>>>>>> pushing
       }
     }
 

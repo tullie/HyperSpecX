@@ -1,7 +1,13 @@
 package MineralClassification;
 
+<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
 import MineralParsing.MineralDataI;
 import MineralParsing.UnresolvedMineralDatumI;
+=======
+import MineralParsing.interfaces.MineralDataI;
+import MineralParsing.interfaces.ResolvedMineralDatumI;
+import MineralParsing.interfaces.UnresolvedMineralDatumI;
+>>>>>>> pushing
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +49,7 @@ public class SimpleUnsupervisedClassifier implements MineralClassifierI {
     return rawMineralData;
   }
 
+<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
   public Map<String,Double> averageMinerals(List<Map<String, Double>> mineralsPerPixel) {
     Map<String, Double> averageMinerals = new HashMap<>();
     Map<String, Integer> mineralCounts = new HashMap<>();
@@ -54,17 +61,31 @@ public class SimpleUnsupervisedClassifier implements MineralClassifierI {
           count = mineralCounts.get(mineralEntry.getKey());
         }
 
+=======
+  private Map<String,Double> averageMinerals(List<Map<String, Double>> mineralsPerPixel) {
+    Map<String, Double> averageMinerals = new HashMap<>();
+
+    for (Map<String, Double> minerals : mineralsPerPixel) {
+      for (Map.Entry<String, Double> mineralEntry : minerals.entrySet()) {
+>>>>>>> pushing
         double average = 0;
         if (averageMinerals.containsKey(mineralEntry.getKey())) {
           average = averageMinerals.get(mineralEntry.getKey());
         }
 
+<<<<<<< c5f6f3b787aedfa94cc5af106aa9649f38b5b85f
         double newAverage = (average * count + mineralEntry.getValue()) / (count + 1);
         averageMinerals.put(mineralEntry.getKey(), newAverage);
         mineralCounts.put(mineralEntry.getKey(), count + 1);
       }
     }
 
+=======
+        double newAverage = (average + mineralEntry.getValue()) / 2.0;
+        averageMinerals.put(mineralEntry.getKey(), newAverage);
+      }
+    }
+>>>>>>> pushing
     return averageMinerals;
   }
 }
