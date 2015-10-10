@@ -995,9 +995,9 @@ var RulersGuides = function (evt, dragdrop) {
         if (vBound === 0) {
             vBound = vRuler.offsetWidth;
             hBound = hRuler.offsetHeight;
+            hBound += 50;
         }
 
-        hBound += 50;
 
         if (
             (
@@ -1030,6 +1030,8 @@ var RulersGuides = function (evt, dragdrop) {
                 guide.type = 'v';
                 snap = xSnap;
                 mode = 1;
+            } else {
+                return;
             }
 
             guide.id = gUid;
