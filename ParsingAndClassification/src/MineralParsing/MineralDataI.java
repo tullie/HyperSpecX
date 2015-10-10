@@ -1,7 +1,10 @@
 package MineralParsing;
 
+import MineralClassification.ResolvedMineralDatumI;
+
 import java.util.List;
 
 public interface MineralDataI {
-  List<List<MineralDatumI>> getMineralRect();
+  List<List<UnresolvedMineralDatumI>> getMineralRect();
+  List<List<ResolvedMineralDatumI>> getResolvedMineralRect();
 }
