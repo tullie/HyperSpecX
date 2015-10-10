@@ -43,20 +43,28 @@ public class SimpleUnsupervisedClassifier implements MineralClassifierI {
     return rawMineralData;
   }
 
-  private Map<String,Double> averageMinerals(List<Map<String, Double>> mineralsPerPixel) {
+  public Map<String,Double> averageMinerals(List<Map<String, Double>> mineralsPerPixel) {
     Map<String, Double> averageMinerals = new HashMap<>();
+    Map<String, Integer> mineralCounts = new HashMap<>();
 
     for (Map<String, Double> minerals : mineralsPerPixel) {
       for (Map.Entry<String, Double> mineralEntry : minerals.entrySet()) {
+        int count = 0;
+        if (mineralCounts.containsKey(mineralEntry.getKey())) {
+          count = mineralCounts.get(mineralEntry.getKey());
+        }
+
         double average = 0;
         if (averageMinerals.containsKey(mineralEntry.getKey())) {
           average = averageMinerals.get(mineralEntry.getKey());
         }
 
-        double newAverage = (average + mineralEntry.getValue()) / 2.0;
+        double newAverage = (average * count + mineralEntry.getValue()) / (count + 1);
         averageMinerals.put(mineralEntry.getKey(), newAverage);
+        mineralCounts.put(mineralEntry.getKey(), count + 1);
       }
     }
+
     return averageMinerals;
   }
 }
