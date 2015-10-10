@@ -1,0 +1,19 @@
+.layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+img {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.info {
+	display: none;
+}
+
+#layer-base {
+	z-index: -1000;
+}
