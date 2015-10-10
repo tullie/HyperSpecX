@@ -36,6 +36,10 @@ $( "#toggle-ruler" ).click(function() {
   $( ".rg-overlay" ).toggle();
 });
 
+$( "#toggle-chart" ).click(function() {
+  $( ".chartDiv" ).toggle();
+});
+
 function toggleRuler(){
 
     
@@ -182,6 +186,10 @@ function rgbToHex(r, g, b) {
 function setupGraph(){
     var ctx = document.getElementById("myChart").getContext("2d");
 
+    $(function() {
+        $( "#myChart" ).draggable();
+      });
+
     var data = [];
 
     var mins = minerals;
@@ -189,21 +197,17 @@ function setupGraph(){
     if (index > -1) {
         mins.splice(index, 1);
     }
-    console.log(colours);
 
     mins.forEach(function(mineral) {
-        console.log(mineral);
         var obj = {};
         obj.value = weights[mineral];
-        obj.highlight = "#"+rgbToHex(Math.max(colours[mineral].r+10,255), Math.max(colours[mineral].g+10,255), Math.max(colours[mineral].b+10,255));
+        obj.highlight = "#"+rgbToHex(colours[mineral].r-10, colours[mineral].g-10, colours[mineral].b-10,255);
         obj.color = "#"+rgbToHex(colours[mineral].r, colours[mineral].g, colours[mineral].b);
         obj.label = mineral;
         data.push(obj);
     })
     
-    console.log(mins);
     console.log(data);
-    console.log(colours[mins[2]]);
 
 //     var data = [
 //     {
@@ -237,7 +241,7 @@ function setupGraph(){
         segmentStrokeWidth : 2,
 
         //Number - The percentage of the chart that we cut out of the middle
-        percentageInnerCutout : 50, // This is 0 for Pie charts
+        percentageInnerCutout : 40, // This is 0 for Pie charts
 
         //Number - Amount of animation steps
         animationSteps : 100,
@@ -256,6 +260,8 @@ function setupGraph(){
     };
 
     var chart = new Chart(ctx).Doughnut(data, options);
+    var legend = chart.generateLegend();
+    $('#chartDiv').append(legend);
 }
 
 

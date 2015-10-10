@@ -10,6 +10,22 @@ body {
 	width: 100px;
 }
 
+canvas {
+	margin-bottom: -5px;
+}
+
+.vertical-align {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    align-items: center;
+    -webkit-justify-content: space-around; /* Safari 6.1+ */
+    justify-content: center;
+}
+
 .layer {
 	position: absolute;
 	top: 0;
@@ -17,14 +33,9 @@ body {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: -5px;
+	
 }
 
-#myChart {
-	position: absolute;
-	top: 200px;
-	left: 200px;
-}
 
 .info {
 	display: none;
@@ -32,6 +43,15 @@ body {
 
 #layer-base {
     z-index: -1000;
+}
+
+.chartDiv {
+	width: 800px;
+	height: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1000000;
+	background-color: #EEE;
 }
 
 /* Use mobile bootstrap menu always */
