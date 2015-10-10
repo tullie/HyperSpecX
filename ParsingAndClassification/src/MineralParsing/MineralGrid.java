@@ -2,6 +2,7 @@ package MineralParsing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MineralGrid implements MineralGridI {
   private List<MineralDatumI> rect;
@@ -37,5 +38,11 @@ public class MineralGrid implements MineralGridI {
         rect.add(datum);
       }
     }
+  }
+
+  @Override
+  public void setMineralsForDatum(int row, int col, Map<String, Double> mineralsForDatum) {
+    int index = row * width + col;
+    rect.get(index).setMinerals(mineralsForDatum);
   }
 }

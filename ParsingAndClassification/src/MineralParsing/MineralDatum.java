@@ -32,4 +32,8 @@ public class MineralDatum implements MineralDatumI {
   @Override public Map<String, Double> getMinerals() {
     return minerals;
   }
+
+  @Override public void setMinerals(Map<String, Double> minerals) {
+    this.minerals = minerals;
+  }
 }

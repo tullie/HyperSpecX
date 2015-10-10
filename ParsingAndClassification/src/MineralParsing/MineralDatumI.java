@@ -7,4 +7,5 @@ public interface MineralDatumI {
   int getGreen();
   int getBlue();
   Map<String, Double> getMinerals();
+  void setMinerals(Map<String, Double> minerals);
 }
