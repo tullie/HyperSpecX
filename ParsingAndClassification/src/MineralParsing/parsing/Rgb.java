@@ -16,16 +16,16 @@ public class Rgb implements RgbI{
 
     @Override
     public int getRed() {
-        return 0;
+        return red;
     }
 
     @Override
     public int getGreen() {
-        return 0;
+        return green;
     }
 
     @Override
     public int getBlue() {
-        return 0;
+        return blue;
     }
 }
