@@ -209,27 +209,6 @@ function setupGraph(){
     
     console.log(data);
 
-//     var data = [
-//     {
-//         value: 300,
-//         color:"#F7464A",
-//         highlight: "#FF5A5E",
-//         label: "Red"
-//     },
-//     {
-//         value: 50,
-//         color: "#46BFBD",
-//         highlight: "#5AD3D1",
-//         label: "Green"
-//     },
-//     {
-//         value: 100,
-//         color: "#FDB45C",
-//         highlight: "#FFC870",
-//         label: "Yellow"
-//     }
-// ]
-
     var options = {
         //Boolean - Whether we should show a stroke on each segment
         segmentShowStroke : true,
@@ -254,15 +233,8 @@ function setupGraph(){
 
         //Boolean - Whether we animate scaling the Doughnut from the centre
         animateScale : false,
-
-        //String - A legend template
-         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
     };
 
     var chart = new Chart(ctx).Doughnut(data, options);
-    var legend = chart.generateLegend();
-    $('#chartDiv').append(legend);
+    $("#cDiv").css("display", "none");
 }
-
-
-
