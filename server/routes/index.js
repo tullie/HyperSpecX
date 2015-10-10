@@ -6,6 +6,7 @@ var getImage = require("../imageGen.js");
 
 var base = process.env.PWD;
 
+
 var fs = require("fs");
 
 router.get('/json/', function(req, res, next) {
@@ -35,6 +36,24 @@ router.get('/json/minerals/:ID', function(req, res, next) {
 		}
 
 		res.send(config.minerals[req.params.ID]);
+	});
+});
+
+router.get('/json/chunks/:CHUNKID', function(req, res, next) {
+	//if the project doesnt exist, go to 404
+	if(req.params.CHUNKID < 0 || req.params.CHUNKID > config.numberOfChunks-1 ) {
+		res.status(404);
+		res.write(JSON.stringify({"error":{"status":404, "message":"invalid chunk id"}}));
+		res.end();
+		return;
+	}
+
+	getImage(req.params.CHUNKID, "base", function(err, stream){
+		if(err){
+			res.send(err);
+		}
+
+		stream.pipe(res);
 	});
 });
 

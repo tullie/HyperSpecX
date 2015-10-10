@@ -4,22 +4,29 @@ var fs = require('fs');
 var PNG = require('node-png').PNG;
 var path = require('path');
 var config = require(path.join(base, "data", "config.json"));
+var async = require("async");
 
-// function init(){
-// 	var numChunks = config.numberOfChunks;
-// 	var numMinerals = config.minerals.length;
+function init(){
+	var numChunks = config.numberOfChunks;
+	var numMinerals = config.minerals.length;
+	var mins = config.minerals;
 
-// 	for(int chunkID = 0; chunkID < numChunks; chunkID++){
-// 		for(int mineralID = 0; mineralID < numMinerals; numMinerals++){
-// 			getImage
-// 		}
-// 	}
-// }
+	var list = [];
+	for (var i = 0; i < numChunks; i++) {
+	    list.push(i);
+	}
 
-
-
-// [{r: 100, g: 105, b: 110, m: {Quartz: 0.5, Brotanium: 0.3}},
-//   {r: 100, g: 105, b: 110, m: {Brotanium: 0.3}}]
+	async.each(list, function(number, callback){
+		getImage(number, 'base', function(err,stream){
+			console.log("BUILT: ChunkID:"+number +", Mineral: base");
+		});
+		async.forEachOf(mins, function(value, key, callback){
+			getImage(number, value, function(err,stream){
+				console.log("BUILT: ChunkID:"+number +", Mineral: "+value);
+			});
+		});
+	});
+}
 
 //when this process completes the name of the generated image file will be passed into the callback
 function getImage(chunkID, mineralName, callback){
@@ -79,5 +86,7 @@ function getImage(chunkID, mineralName, callback){
 		}
 	});
 }
+
+init();
 
 module.exports = getImage;
