@@ -1,7 +1,7 @@
 {
-	"number-of-chunks": 5,
-	"chunk-width": 768,
-	"chunk-height" : 1024,
+	"numberOfChunks": 5,
+	"chunkWidth": 768,
+	"chunkHeight" : 1024,
 	"minerals": [
         "one",
         "two",

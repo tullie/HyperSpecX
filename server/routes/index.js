@@ -2,19 +2,25 @@ var express = require('express');
 var path = require('path');
 var config = require('../data/config.json');
 var router = express.Router();
+var img = require("../imageGen.js");
 
 var base = process.env.PWD;
 
 var fs = require("fs");
 
-function getFile(filename, callback){
-	
-}
+router.get('/', function(req, res, next) {
+	img(1, 0, function(err, stream){
+		if(err){
+			res.send(err);
+		}
+		stream.pipe(res);
+	});
+});
+
 
 router.get('/json/', function(req, res, next) {
 	res.send(JSON.stringify({"links":["minerals","chunks"]}));
 });
-
 
 router.get('/json/chunks/', function(req, res, next) {
 	res.send(JSON.stringify(config));
@@ -31,6 +37,8 @@ router.get('/json/minerals/', function(req, res, next) {
 	});
 });
 
+console.log(img);
+
 router.get('/json/minerals/:ID', function(req, res, next) {
 	fs.readFile(path.join(base, "data", "minerals.json"), 'utf8', function (err, data) {
 		if(config.minerals[req.params.ID] === undefined) {
@@ -44,30 +52,32 @@ router.get('/json/minerals/:ID', function(req, res, next) {
 
 router.get('/json/chunks/:CHUNKID/:LAYERID', function(req, res, next) {
 	//if the project doesnt exist, go to 404
-	// if( === undefined) {
-	// 	next();
-	// }
-	buildImageFromJSON(path.join(__dirname, req.params.ID+".json"), function(err, data){
+	if(req.params.CHUNKID < 0 || req.params.CHUNKID > config.numberOfChunks-1 ) {
+		res.status(404);
+		res.write(JSON.stringify({"error":{"status":404, "message":"invalid chunk id"}}));
+		res.end();
+		return;
+	}
+
+	if(req.params.LAYERID < 0 || req.params.LAYERID > config.minerals.length-1 ) {
+		res.status(404);
+		res.write(JSON.stringify({"error":{"status":404, "message":"invalid layer id"}}));
+		res.end();
+		return;
+	}
+
+	buildImageFromJSON(path.join(__dirname, req.params.CHUNKID+".json"), function(err, data){
 		if (err) {
 			res.status(404);
-			res.send(JSON.stringify({"error":{"status":404, "message":"File not found"}}));
+			res.write(JSON.stringify({"error":{"status":404, "message":"file not found"}}));
+			res.end();
+			return;
 		}
 
-		res.send(data);
+		res.write(data);
+		res.end();
 	});
 });
-
-function buildImageFromJSON(filename, callback){
-	fs.readFile(filename, 'utf8', function (err, data) {
-		if (err) {
-			return callback(err);
-		}
-
-		callback(err, data);
-	});
-}
-
-
 
 
 module.exports = router;

@@ -1,8 +1,8 @@
 var fs = require("fs");
 
 var pixels = [];
-var maxX = 10;
-var maxY = 10;
+var maxX = 768;
+var maxY = 1024;
 var numLayers = 3;
 
 for (var y = 0; y < maxY; y++) {
@@ -24,5 +24,5 @@ for (var y = 0; y < maxY; y++) {
 
 var obj = {"pixels": pixels};
 
-console.log(obj);
+console.log(JSON.stringify(obj));
 
