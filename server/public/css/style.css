@@ -59,4 +59,21 @@ img, canvas {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+#top-bar{
+	background-color: #2F4E6F;
+	width: 100%;
+	height: 100%
+
+}
+
+body {
+    background-color: #CCCCCC;
+}
+
+.title-navbar{
+	font: bold !important;
+	color: white !important;
+	font-size: 20px !important;
+}
 /* End force mobile boostrap */
