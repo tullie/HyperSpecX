@@ -994,10 +994,8 @@ var RulersGuides = function (evt, dragdrop) {
 
         if (vBound === 0) {
             vBound = vRuler.offsetWidth;
-            hBound = hRuler.offsetHeight;
+            hBound = hRuler.offsetHeight + 50;
         }
-
-        hBound += 50;
 
         if (
             (
