@@ -2,9 +2,12 @@
 var URL = 'http://localhost:3000';
 var minerals = [];
 var layers = {};
+var weights;
+var colours;
 var width;
 var height;
 var count;
+var chart;
 
 function toggleLayer(button){
     var key = button.innerHTML;
@@ -100,13 +103,18 @@ function setup() {
             if (ajaxReq.status==200) {
                 //do something with ajaxReq.responseText
                 var res = JSON.parse(ajaxReq.responseText);
-                minerals = res.m;
                 width = res.chunkWidth;
                 height = res.chunkHeight;
+
+                minerals = res.m;
+                weights = res.weights;
+                colours = res.colours;
+
                 numberOfChunks = res.numberOfChunks;
                 minerals.push("base");
                 getLayers();
                 addButtons();
+                setupGraph();
             }
         }
     }
@@ -170,3 +178,85 @@ function rgbToHex(r, g, b) {
         throw "Invalid color component";
     return ((r << 16) | (g << 8) | b).toString(16);
 }
+
+function setupGraph(){
+    var ctx = document.getElementById("myChart").getContext("2d");
+
+    var data = [];
+
+    var mins = minerals;
+    var index = mins.indexOf("base");
+    if (index > -1) {
+        mins.splice(index, 1);
+    }
+    console.log(colours);
+
+    mins.forEach(function(mineral) {
+        console.log(mineral);
+        var obj = {};
+        obj.value = weights[mineral];
+        obj.highlight = "#"+rgbToHex(Math.max(colours[mineral].r+10,255), Math.max(colours[mineral].g+10,255), Math.max(colours[mineral].b+10,255));
+        obj.color = "#"+rgbToHex(colours[mineral].r, colours[mineral].g, colours[mineral].b);
+        obj.label = mineral;
+        data.push(obj);
+    })
+    
+    console.log(mins);
+    console.log(data);
+    console.log(colours[mins[2]]);
+
+//     var data = [
+//     {
+//         value: 300,
+//         color:"#F7464A",
+//         highlight: "#FF5A5E",
+//         label: "Red"
+//     },
+//     {
+//         value: 50,
+//         color: "#46BFBD",
+//         highlight: "#5AD3D1",
+//         label: "Green"
+//     },
+//     {
+//         value: 100,
+//         color: "#FDB45C",
+//         highlight: "#FFC870",
+//         label: "Yellow"
+//     }
+// ]
+
+    var options = {
+        //Boolean - Whether we should show a stroke on each segment
+        segmentShowStroke : true,
+
+        //String - The colour of each segment stroke
+        segmentStrokeColor : "#fff",
+
+        //Number - The width of each segment stroke
+        segmentStrokeWidth : 2,
+
+        //Number - The percentage of the chart that we cut out of the middle
+        percentageInnerCutout : 50, // This is 0 for Pie charts
+
+        //Number - Amount of animation steps
+        animationSteps : 100,
+
+        //String - Animation easing effect
+        animationEasing : "easeOutBounce",
+
+        //Boolean - Whether we animate the rotation of the Doughnut
+        animateRotate : true,
+
+        //Boolean - Whether we animate scaling the Doughnut from the centre
+        animateScale : false,
+
+        //String - A legend template
+         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+    };
+
+    var chart = new Chart(ctx).Doughnut(data, options);
+}
+
+
+
