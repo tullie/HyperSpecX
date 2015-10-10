@@ -1,19 +1,17 @@
 var fs = require("fs");
 
 var pixels = [];
-var maxX = 768;
-var maxY = 1024;
-var numLayers = 3;
+var maxX = process.argv[2];
+var maxY = process.argv[3];
+var minerals = ["one", "two", "three"];
 
 for (var y = 0; y < maxY; y++) {
 	for (var x = 0; x < maxX; x++) {
-		var layers = [];
-		for(var i = 0; i < numLayers; i++){
-			layers.push(Math.random());
+		var layers = {};
+		for(var i = 0; i < minerals.length; i++){
+			layers[minerals[i]] = Math.random();
 		}
 		pixels.push({
-			"x" : x,
-			"y" : y,
 			"r" : Math.round(Math.random()*255),
 			"g" : Math.round(Math.random()*255),
 			"b" : Math.round(Math.random()*255),
