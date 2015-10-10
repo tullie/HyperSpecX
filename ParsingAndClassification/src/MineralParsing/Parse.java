@@ -14,20 +14,20 @@ public class Parse {
   private String[] line;
   private BufferedImage img;
 
-  public MineralGrid parseFilesToMineralData(int blockHeight, int blockWidth) {
+  public MineralGrid parseFilesToMineralData(int blockHeight, int centerWidth) {
     loadImage();
     loadExcel();
-    MineralGrid md = new MineralGrid(img.getWidth(), img.getHeight());
+    MineralGrid md = new MineralGrid(img.getWidth(), blockHeight);
     Map<String, Double> mineralMap = null;
     for (int y = 0; y < blockHeight; y++) {
-      if (y % blockWidth == 0) {
+      if (y % centerWidth == 0) {
         mineralMap = readExcelLine();
       }
 
       for (int x = 0; x < img.getWidth(); x++) {
         Map<String, Double> tempMineralMap = null;
-        if (x >= (img.getWidth() / 2) - (blockWidth / 2)
-            && x <= (img.getWidth() / 2) + (blockWidth / 2)) {
+        if (x >= (img.getWidth() / 2) - (centerWidth / 2)
+            && x <= (img.getWidth() / 2) + (centerWidth / 2)) {
           tempMineralMap = mineralMap;
         }
         Color mycolor = new Color(img.getRGB(x, y));

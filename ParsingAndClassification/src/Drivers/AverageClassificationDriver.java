@@ -25,9 +25,10 @@ public class AverageClassificationDriver {
     String json = MineralDataToJson.parseResolvedMineralData(resolvedMineralGrid);
 
     // Write JSON to file.
-    PrintWriter out = new PrintWriter(new File("picture.json"));
+    PrintWriter out = new PrintWriter(new File("mineralData.json"));
     out.write(json);
     out.close();
+    System.out.println("File created: mineralData.json");
   }
 }
 

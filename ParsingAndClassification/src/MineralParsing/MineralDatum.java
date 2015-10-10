@@ -30,6 +30,6 @@ public class MineralDatum implements MineralDatumI {
   }
 
   @Override public Map<String, Double> getMinerals() {
-    return new HashMap<>(minerals);
+    return minerals;
   }
 }
