@@ -1,8 +1,13 @@
 // var URL = 'http://192.168.51.134:3000';
 var URL = 'http://localhost:3000';
 var minerals = [];
+var layers = [];
 var chunks_per_mineral = [];
 var displayed_images = [];
+
+function addLayer(){
+
+}
 
 function addImage(img) {
     var image = new Image();
@@ -14,6 +19,7 @@ function addImage(img) {
 }
 
 function loadMineralChunks(index){
+
     if (index === 'base') {
         index = minerals.length-1;
     }
@@ -29,6 +35,7 @@ function setup() {
             if (ajaxReq.status==200) {
                 //do something with ajaxReq.responseText
                 minerals = JSON.parse(ajaxReq.responseText).names;
+                console.log(minerals);
                 populateChunks();
             }
         }
@@ -61,3 +68,4 @@ function populateChunks() {
 }
 
 setup();
+console.log(chunks_per_mineral);
