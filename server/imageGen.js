@@ -5,7 +5,13 @@ var PNG = require('node-png').PNG;
 var path = require('path');
 var config = require(path.join(base, "data", "config.json"));
 var async = require("async");
-var colours = [];
+var colours = {};
+var weights = {};
+var shownLayers = [];
+var shownColours = {};
+
+	// "m":["Kaolinite WX","Kaolinite PX","Dickite","Muscovite","Paragonite","Montmorillonite","Nontronite","Magnesium Clays","FeMgChlorite","MgChlorite","Biotite","Phlogopite","Actinolite","Riebeckite","Hornblende","Serpentine","Epidote","Zoisite","FeTourmaline","Calcite","Dolomite","Ankerite","Magnesite","Siderite","Jarosite","Opal","Illitic Muscovite","Fe2+ Goethite","Fe3+ Goethite","FeChlorite","Talc","Rubellite"]
+
 
 function makeColours(callback){
 	
@@ -73,6 +79,8 @@ function getImage(chunkID, mineralName, callback){
 					filterType: -1
 				});
 
+
+
 				for (var i = 0, len = json.length; i < len; i++) { 
 					var idx = i*4;
 					var item = json[i];
@@ -87,11 +95,19 @@ function getImage(chunkID, mineralName, callback){
 						img.data[idx+2] = colours[mineralName].b;	//blue
 					}
 					// and reduce opacity 
+
 					var opacity;
 					if(mineralName === "base"){
 						opacity = 255;
 					} else if (item.m.hasOwnProperty(mineralName)){
-						opacity = item.m[mineralName]*255;
+						opacity = item.m[mineralName]*170;
+						if(shownLayers.indexOf(mineralName) == -1){
+							shownLayers.push(mineralName);
+							weights[mineralName] = item.m[mineralName];
+							shownColours[mineralName] = colours[mineralName];
+						} else {
+							weights[mineralName] += item.m[mineralName];
+						}
 					} else {
 						opacity = 0;
 					}
@@ -101,37 +117,7 @@ function getImage(chunkID, mineralName, callback){
 					idx += 4; 
 				}
 
-
-				// for (var y = 0; y < img.height; y++) {
-				// 	for (var x = 0; x < img.width; x++) {
-				// 		var idx = (img.width * y + x) << 2;
-				// 		var current = json[(img.width * y + x)];
-				// 		// console.log(current);
-
-				// 		// if(current===undefined)continue;
-
-				// 		if(mineralName === "base"){
-				// 			img.data[idx] = current.r; 	//red
-				// 			img.data[idx+1] = current.g; 	//green
-				// 			img.data[idx+2] = current.b;	//blue
-				// 		} else {
-				// 			img.data[idx] = colours[mineralName].r; 	//red
-				// 			img.data[idx+1] = colours[mineralName].g; 	//green
-				// 			img.data[idx+2] = colours[mineralName].b;	//blue
-				// 		}
-				// 		// and reduce opacity 
-				// 		var opacity;
-				// 		if(mineralName === "base"){
-				// 			opacity = 255;
-				// 		} else if (current.m.hasOwnProperty(mineralName)){
-				// 			opacity = current.m[mineralName]*255;
-				// 		} else {
-				// 			opacity = 0;
-				// 		}
-
-				// 		img.data[idx+3] = opacity;
-				// 	}
-				// }
+			
 
 				var stream = img.pack();
 
@@ -144,4 +130,8 @@ function getImage(chunkID, mineralName, callback){
 
 init();
 
-module.exports = getImage;
+module.exports.img = getImage;
+module.exports.layers = shownLayers;
+module.exports.colours = shownColours;
+module.exports.weights = weights;
+
