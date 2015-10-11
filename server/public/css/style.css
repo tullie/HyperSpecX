@@ -73,7 +73,7 @@ body {
 .navbar-default .navbar-brand {
 	margin-bottom: 0;
 	font-weight: bold;
-	font-size: 1.3em;
+	font-size: 1.5em;
 }
 
 .navbar-default .navbar-nav>li>a:Hover, .navbar-default .navbar-brand:Hover {
@@ -82,6 +82,7 @@ body {
 
 .navbar-default .navbar-nav>.active>a {
 	background-color: #eee;
+	/*color: */
 }
 
 
