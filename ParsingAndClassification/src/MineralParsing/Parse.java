@@ -57,7 +57,7 @@ public class Parse {
     // Write JSON to file.
     PrintWriter out = null;
     try {
-      out = new PrintWriter(new File("resources/chunks/chunk_"+index+".json"));
+      out = new PrintWriter(new File("resources/chunk_"+index+".json"));
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }

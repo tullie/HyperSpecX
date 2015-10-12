@@ -27,7 +27,8 @@ public class MineralGrid implements MineralGridI {
     for (int j = 0; j < height; ++j) {
       List<MineralDatumI> row = new ArrayList<>(width);
       for (int i = 0; i < width; ++i) {
-        row.add(rect.get((width * j) + i));
+        int index = (width * j) + i;
+        row.add(rect.get(index));
       }
       list.add(row);
     }
