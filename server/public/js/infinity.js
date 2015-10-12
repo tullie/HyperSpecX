@@ -2,9 +2,12 @@
 var URL = 'http://localhost:3000';
 var minerals = [];
 var layers = {};
+var weights;
+var colours;
 var width;
 var height;
 var count;
+var chart;
 
 function toggleLayer(button){
     var key = button.innerHTML;
@@ -31,6 +34,10 @@ function toggleLayer(button){
 
 $( "#toggle-ruler" ).click(function() {
   $( ".rg-overlay" ).toggle();
+});
+
+$( "#toggle-chart" ).click(function() {
+  $( ".chartDiv" ).toggle();
 });
 
 function toggleRuler(){
@@ -100,13 +107,18 @@ function setup() {
             if (ajaxReq.status==200) {
                 //do something with ajaxReq.responseText
                 var res = JSON.parse(ajaxReq.responseText);
-                minerals = res.m;
                 width = res.chunkWidth;
                 height = res.chunkHeight;
+
+                minerals = res.m;
+                weights = res.weights;
+                colours = res.colours;
+
                 numberOfChunks = res.numberOfChunks;
                 minerals.push("base");
                 getLayers();
                 addButtons();
+                setupGraph();
             }
         }
     }
@@ -135,6 +147,13 @@ function addNavButton(mineralName){
     a.setAttribute('id', 'button-'+mineralName);
     a.innerHTML = mineralName;
 
+    var colour;
+    if(colours[mineralName]){
+        colour = "#"+rgbToHex(colours[mineralName].r, colours[mineralName].g, colours[mineralName].b);
+    } else {
+        colour = "#FFF";
+    }
+    a.setAttribute('style',"border-bottom-style: solid; border-bottom-width: 10px; border-bottom-color:" +colour+";");
     li.appendChild(a);
     list.appendChild(li);
 }
@@ -169,4 +188,60 @@ function rgbToHex(r, g, b) {
     if (r > 255 || g > 255 || b > 255)
         throw "Invalid color component";
     return ((r << 16) | (g << 8) | b).toString(16);
+}
+
+function setupGraph(){
+    var ctx = document.getElementById("myChart").getContext("2d");
+
+    $(function() {
+        $( "#myChart" ).draggable();
+      });
+
+    var data = [];
+
+    var mins = minerals;
+    var index = mins.indexOf("base");
+    if (index > -1) {
+        mins.splice(index, 1);
+    }
+
+    mins.forEach(function(mineral) {
+        var obj = {};
+        obj.value = weights[mineral];
+        obj.highlight = "#"+rgbToHex(colours[mineral].r-10, colours[mineral].g-10, colours[mineral].b-10,255);
+        obj.color = "#"+rgbToHex(colours[mineral].r, colours[mineral].g, colours[mineral].b);
+        obj.label = mineral;
+        data.push(obj);
+    })
+    
+    console.log(data);
+
+    var options = {
+        //Boolean - Whether we should show a stroke on each segment
+        segmentShowStroke : true,
+
+        //String - The colour of each segment stroke
+        segmentStrokeColor : "#fff",
+
+        //Number - The width of each segment stroke
+        segmentStrokeWidth : 2,
+
+        //Number - The percentage of the chart that we cut out of the middle
+        percentageInnerCutout : 40, // This is 0 for Pie charts
+
+        //Number - Amount of animation steps
+        animationSteps : 100,
+
+        //String - Animation easing effect
+        animationEasing : "easeOutBounce",
+
+        //Boolean - Whether we animate the rotation of the Doughnut
+        animateRotate : true,
+
+        //Boolean - Whether we animate scaling the Doughnut from the centre
+        animateScale : false,
+    };
+
+    var chart = new Chart(ctx).Doughnut(data, options);
+    $("#cDiv").css("display", "none");
 }

@@ -1,5 +1,6 @@
 body {
 	font-family: 'Raleway', "Helvetica Neue",Helvetica,Arial,sans-serif;
+	
 }
 
 #infoDiv {
@@ -10,18 +11,32 @@ body {
 	width: 100px;
 }
 
+canvas {
+	margin-bottom: -5px;
+}
+
+.vertical-align {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    align-items: center;
+    -webkit-justify-content: space-around; /* Safari 6.1+ */
+    justify-content: center;
+}
+
 .layer {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
-}
-
-img, canvas {
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: -5px;
+	
 }
+
 
 .info {
 	display: none;
@@ -31,8 +46,52 @@ img, canvas {
     z-index: -1000;
 }
 
+.chartDiv {
+	width: 800px;
+	height: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1000000;
+	background-color: #EEE;
+}
+
+#top-bar{
+	background-color: #2F4E6F;
+	width: 100%;
+
+}
+
+
+body {
+    background-color: #CCCCCC;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-default .navbar-brand {
+	margin-bottom: 0;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.navbar-default .navbar-nav>li>a:Hover, .navbar-default .navbar-brand:Hover {
+    color: #777;
+}
+
+.navbar-default .navbar-nav>.active>a {
+	background-color: #eee;
+	/*color: */
+}
+
+
+li:hover {
+	background-color: #e7e7e7;
+	color: #FFF;
+}
 /* Use mobile bootstrap menu always */
-.navbar-header {
+/*.navbar-header {
     float: none;
 }
 .navbar-toggle {
@@ -60,20 +119,9 @@ img, canvas {
     padding-bottom: 10px;
 }
 
-#top-bar{
-	background-color: #2F4E6F;
-	width: 100%;
-	height: 100%
-
-}
-
-body {
-    background-color: #CCCCCC;
-}
-
 .title-navbar{
 	font: bold !important;
 	color: white !important;
 	font-size: 20px !important;
-}
+}*/
 /* End force mobile boostrap */
